@@ -19,22 +19,26 @@ const bot = new Telegraf(config.get('TEL_TOKKEN_BOT'))
 bot.use(session())
 
 bot.command('image', async (ctx) => {
-    const text = ctx.message.text.split('/image ')[1];
+  const text = ctx.message.text.split('/image ')[1];
 
-    await ctx.reply(code("Сообщение принятно,дай подумать..."))
-    await ctx.reply(code(`Ты: ${text}`))
-  
-    try {
-      const responseImage = await openai.image(text)
-  
-      const imageURL = responseImage.data.data[0].url;
-  
-      ctx.replyWithPhoto({ url: imageURL });
-    } catch (error) {
-      console.error(error);
-      ctx.reply('Произошла ошибка при генерации изображения. Попробуйте еще раз позже.');
-    }
-  });
+  if (!text) {
+    return ctx.reply('Вы не ввели текст для генерации изображения.');
+  }
+
+  await ctx.reply(code("Сообщение принятно,дай подумать..."))
+  await ctx.reply(code(`Ты: ${text}`))
+
+  try {
+    const responseImage = await openai.image(text)
+
+    const imageURL = responseImage.data.data[0].url;
+
+    ctx.replyWithPhoto({ url: imageURL });
+  } catch (error) {
+    console.error(error);
+    ctx.reply('Произошла ошибка при генерации изображения. Попробуйте еще раз позже.');
+  }
+});
   
 
 bot.command('new', async (ctx)=>{
