@@ -44,9 +44,11 @@ bot.command('new', async (ctx)=>{
 })
 
 bot.command('start', async (ctx)=>{
-    ctx.session = INITIAL_SESSION
-    ctx.session.messages = []
-    await ctx.reply("Привет это ChatGpt созданный специально для семьи Спасовых, можешь записать голосовое сообщение или ввести текст , чтобы я придумал новую смешную шутку про штаны Артема")
+  ctx.session = INITIAL_SESSION
+  ctx.session.messages = []
+  await ctx.reply("Привет это ChatGpt \n"+
+  "Команды:/new - начать новую сессию\n"+
+  "/image (текст для генерации) ")
 })
 
 bot.on(message('voice'), async ctx =>{
