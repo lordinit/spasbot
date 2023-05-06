@@ -83,8 +83,6 @@ bot.on(message('voice'), async ctx =>{
             await ctx.reply('Что-то пошло не так при общении с OpenAI API')
           }
 
-        await ctx.reply(response.content)
-
     }catch(e){
         console.log("error", e.message)
     }
