@@ -26,7 +26,7 @@ bot.command('image', async (ctx) => {
   }
 
   await ctx.reply(code("Сообщение принятно,дай подумать..."))
-  await ctx.reply(code(`Ты: ${text}`))
+  await ctx.reply(code(`Описание: ${text}`))
 
   try {
     const responseImage = await openai.image(text)
