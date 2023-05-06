@@ -25,18 +25,16 @@ class OpenAI {
 
     async chat(messages){
         try {
-
-            const response = await this.openai.createChatCompletion({
-                model:'gpt-3.5-turbo',
-                messages,
-            })
-            return response.data.choices[0].message
-            
+          const response = await this.openai.createChatCompletion({
+            model:'gpt-3.5-turbo',
+            messages,
+          })
+          return response.data.choices[0].message
         } catch (e) {
-            console.log("error while chat", e.message)
-            
+          console.log("error while chat", e.message)
+          return undefined // добавляем возврат undefined в случае ошибки
         }
-    }
+      }
 
     async transcription(filelpath){
         try {
