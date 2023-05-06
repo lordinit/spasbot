@@ -47,7 +47,6 @@ bot.on(message('voice'), async ctx =>{
   
       const response = await openai.chat(ctx.session.messages)
   
-      // проверяем, что результат не undefined
       if (response !== undefined) {
         ctx.session.messages.push({
           role:openai.roles.ASSISTAN, 
