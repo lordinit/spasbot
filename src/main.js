@@ -47,7 +47,7 @@ bot.command('start', async (ctx)=>{
   ctx.session = INITIAL_SESSION
   ctx.session.messages = []
   await ctx.reply("Привет это ChatGpt \n"+
-  "Команды:/new - начать новую сессию\n"+
+  "Команды:\n/new - начать новую сессию\n"+
   "/image (текст для генерации) ")
 })
 
