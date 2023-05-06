@@ -38,7 +38,7 @@ bot.on(message('voice'), async ctx =>{
 
         const text = await openai.transcription(mp3Path)
 
-        await ctx.reply(code(`Ответ: ${text}`))
+        await ctx.reply(code(`Ты: ${text}`))
 
         ctx.session.messages.push({role: openai.roles.USER, content:text})
 
