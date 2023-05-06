@@ -7,6 +7,7 @@ import config from 'config'
 import { ogg }  from './ogg.js'
 import { openai } from './openai.js'
 
+
 const INITIAL_SESSION = {
     messages:[],
 }
@@ -16,6 +17,25 @@ console.log(config.get("TEST_ENV"))
 const bot = new Telegraf(config.get('TEL_TOKKEN_BOT'))
 
 bot.use(session())
+
+bot.command('image', async (ctx) => {
+    const text = ctx.message.text.split('/image ')[1];
+
+    await ctx.reply(code("Сообщение принятно,дай подумать..."))
+    await ctx.reply(code(`Ты: ${text}`))
+  
+    try {
+      const responseImage = await openai.image(text)
+  
+      const imageURL = responseImage.data.data[0].url;
+  
+      ctx.replyWithPhoto({ url: imageURL });
+    } catch (error) {
+      console.error(error);
+      ctx.reply('Произошла ошибка при генерации изображения. Попробуйте еще раз позже.');
+    }
+  });
+  
 
 bot.command('new', async (ctx)=>{
     ctx.session = INITIAL_SESSION

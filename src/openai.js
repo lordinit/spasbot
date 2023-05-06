@@ -1,6 +1,7 @@
 import { Configuration, OpenAIApi } from "openai"
 import config from 'config'
 import { createReadStream } from "fs"
+import axios from "axios"
 
 
 class OpenAI {
@@ -17,11 +18,7 @@ class OpenAI {
             apiKey,
           });
         this.openai = new OpenAIApi(configuration);
-
-        
-    
     }
-
 
     async chat(messages){
         try {
@@ -48,6 +45,23 @@ class OpenAI {
             
         }
     }
-}
+
+    async image(prompt) {
+      try {
+        const responseImage = await axios.post('https://api.openai.com/v1/images/generations', {
+          model: 'image-alpha-001',
+          prompt: prompt,
+        }, {
+          headers: {
+            Authorization: `Bearer ${config.get('OpenAIKey')}`, 
+            'Content-Type': 'application/json',
+          },
+        });
+        return responseImage
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  }
 
 export const openai = new OpenAI(config.get("OpenAIKey"))
