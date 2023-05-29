@@ -22,7 +22,7 @@ bot.command('image', async (ctx) => {
   const text = ctx.message.text.split('/image ')[1];
 
   if (!text) {
-    return ctx.reply('Вы не ввели текст для генерации изображения. Пример : /image Семья Спасовых');
+    return ctx.reply('Вы не ввели текст для генерации изображения. Пример : /image Опушка леса');
   }
 
   await ctx.reply(code("Сообщение принятно,дай подумать..."))
